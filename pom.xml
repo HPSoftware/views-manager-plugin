@@ -1,53 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.hp.mercury.ci</groupId>
-	<artifactId>ci-root</artifactId>
-	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>${project.artifactId}</name>
+    <parent>
+        <groupId>com.hp.mercury.ci.jenkins.plugins</groupId>
+        <artifactId>jenkins-plugins-root</artifactId>
+        <version>1.509.1</version>
+    </parent>
 
-    <!--
-    This pom is an aggregator for the modules, BUT IT IS NOT A PARENT FOR THEM.
-    don't put anything here that you would like them to inherit, such as repositories etc.
-    -->
+  <artifactId>views-manager</artifactId>  
+  <packaging>hpi</packaging>
 
-	<modules>
-		<module>commons</module>
-		<module>maven-plugins</module>
-        <module>jenkins-plugins</module>
-    </modules>
+    <dependencies>
 
-    <profiles>
-        <profile>
-           <id>maas</id>
-            <pluginRepositories>
-                <pluginRepository>
-                    <!-- override parent settings by id -->
-                    <id>cd</id>
-                    <url>http://mydtnex01.isr.hp.com:8081/nexus/content/groups/cd-public/</url>
-                    <releases><enabled>true</enabled></releases>
-                    <snapshots><enabled>false</enabled></snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-        <profile>
-           <id>agm</id>
-            <pluginRepositories>
-                <pluginRepository>
-                    <!-- override parent settings by id -->
-                    <id>cd</id>
-                    <url>http://mydtnex01.isr.hp.com:8081/nexus/content/groups/cd-public/</url>
-                    <releases><enabled>true</enabled></releases>
-                    <snapshots><enabled>false</enabled></snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
+        <!-- our jenkins has this plugin to support hierachic views -->
+        <dependency>
+             <groupId>org.jenkins-ci.plugins</groupId>
+             <artifactId>nested-view</artifactId>
+        </dependency>
 
+        <!-- our jenkins has this plugin to support hierachic views -->
+        <dependency>
+            <groupId>com.hp.mercury.ci</groupId>
+            <artifactId>commons-core</artifactId>
+        </dependency>
+
+        <!-- damn plugin won't build without this..
+        maybe a bug in jenkins? regression maven hpi plugin or jenkins plugin pom
+
+        <dependency>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>ui-samples-plugin</artifactId>
+            <version>1.509.1</version>
+            <scope>optional</scope>
+        </dependency>
+        -->
+
+    </dependencies>
+
+
+  <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need
+  <repositories>
+    <repository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  -->
 
 
 </project>

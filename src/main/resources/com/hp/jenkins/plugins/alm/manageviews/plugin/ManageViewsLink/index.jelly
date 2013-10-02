@@ -1,0 +1,73 @@
+<j:jelly
+    xmlns:j="jelly:core"
+    xmlns:st="jelly:stapler"
+    xmlns:d="jelly:define"
+    xmlns:l="/lib/layout"
+    xmlns:t="/lib/hudson"
+    xmlns:f="/lib/form"
+    xmlns:i="jelly:fmt"
+    xmlns:local="local">
+
+     <l:layout title="Views Manager">
+        <l:main-panel>
+
+            <j:set var="pluginRoot" value="${rootURL}/plugin/views-manager/"/>
+            <j:set var="jsRoot" value="${pluginRoot}js/"/>
+            <j:set var="iconsRoot" value="${jsRoot}jenkinstheme/"/>
+
+            <div id="view-manger-container">
+                <!-- tree container -->
+                <div id="viewsTree"/>
+                <div id="ajax_loading_indicator" style="position:fixed;
+                                                            top: 50%;
+                                                            left: 50%;
+                                                            width:30em;
+                                                            height:18em;
+                                                            margin-top: -9em;
+                                                            margin-left: -15em;
+                                                            border: 1px solid #ccc;
+                                                            background-color: #f3f3f3;
+                                                            text-align: center;
+                                                            line-height: 18em">
+                    <img src="${pluginRoot}images/spinner.gif" />
+                    Contacting server, please wait...
+                </div>
+            </div>
+
+            <!-- jenkins dynamically generated ajax stub for proxying to server side logic -->
+            <script type="text/javascript">
+
+                var jsProxy = <st:bind value="${it.getJsProxy()}"/>;
+                var iconsRootUrl = "${iconsRoot}";
+
+                <!--
+                alert(0);
+                jsProxy.getIntegerString("1234",
+                    function(rsp) {
+                        alert(rsp.responseObject());
+                    }
+                );
+                alert(1);
+                jsProxy.getIntegerString(1234,
+                    function(rsp) {
+                        alert(rsp.responseObject());
+                    }
+                );
+                -->
+
+            </script>
+
+            <!-- jquery and jstree dependencies -->
+            <script type="text/javascript" src="${jsRoot}jstree/_lib/jquery.js"/>
+            <script type="text/javascript" src="${jsRoot}jstree/_lib/jquery.cookie.js"/>
+            <script type="text/javascript" src="${jsRoot}jstree/jquery.jstree.js"/>
+
+            <!-- our jstree bindings -->
+            <script type="text/javascript" src="${jsRoot}view-manager-gui.js"/>
+
+
+
+        </l:main-panel>
+     </l:layout>
+
+</j:jelly>
