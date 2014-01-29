@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.hp.mercury.ci.jenkins.plugins</groupId>
         <artifactId>jenkins-plugins-root</artifactId>
-        <version>1.509.3</version>
+        <version>1.509.3.2</version>
     </parent>
 
   <artifactId>views-manager</artifactId>  
